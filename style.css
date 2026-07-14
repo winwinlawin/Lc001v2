@@ -1,0 +1,345 @@
+/* =========================================================
+   LAWIN CANVAS — DESIGN TOKENS
+   Palette (from the official logo):
+   --lc-green-deep   #12201a   background, near-black forest green
+   --lc-green-panel  #1b2f22   card / overlay surfaces
+   --lc-gold         #c9a24a   primary accent (wordmark gold)
+   --lc-gold-light   #e8cd8a   glow / highlight gold
+   --lc-ivory        #f5efe1   body text on dark surfaces
+   --lc-sage         #7a9f6f   secondary accent (leaf motif)
+   Type:
+   Display — Cormorant Garamond (matches the logo's classic serif)
+   Body    — Poppins (clean, quiet, lets the serif lead)
+   ========================================================= */
+
+:root {
+  --lc-green-deep: #12201a;
+  --lc-green-panel: #1b2f22;
+  --lc-gold: #c9a24a;
+  --lc-gold-light: #e8cd8a;
+  --lc-ivory: #f5efe1;
+  --lc-sage: #7a9f6f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--lc-green-deep);
+  color: var(--lc-ivory);
+}
+
+.hidden {
+  display: none !important;
+}
+
+a-scene {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===================== 1. WELCOME SCREEN ===================== */
+
+#welcome-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background:
+    radial-gradient(ellipse at 50% 30%, #1c3524 0%, var(--lc-green-deep) 65%);
+  padding: 9vh 8vw 4vh;
+  text-align: center;
+  overflow: hidden;
+}
+
+.welcome-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 480px;
+  margin: auto 0;
+}
+
+.logo-glow {
+  position: absolute;
+  top: -6%;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 162, 74, 0.35) 0%, rgba(201, 162, 74, 0) 70%);
+  filter: blur(6px);
+  animation: glow-breathe 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { transform: scale(0.94); opacity: 0.75; }
+  50%      { transform: scale(1.05); opacity: 1; }
+}
+
+.logo {
+  position: relative;
+  width: 62vw;
+  max-width: 280px;
+  margin-bottom: 1.6rem;
+  animation: logo-rise 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes logo-rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.welcome-copy {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.28rem;
+  line-height: 1.55;
+  color: var(--lc-ivory);
+  max-width: 360px;
+  margin: 0 0 2.6rem;
+  animation: fade-in 1.4s ease 0.3s both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.begin-button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+  color: #1b1607;
+  background: linear-gradient(135deg, var(--lc-gold-light), var(--lc-gold));
+  border: none;
+  border-radius: 999px;
+  padding: 1.05rem 2.8rem;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(201, 162, 74, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fade-in 1.4s ease 0.55s both;
+}
+
+.begin-button:active {
+  transform: scale(0.97);
+  box-shadow: 0 5px 14px rgba(201, 162, 74, 0.22);
+}
+
+.footer-tagline {
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: rgba(245, 239, 225, 0.45);
+  margin: 0;
+  animation: fade-in 1.4s ease 0.8s both;
+}
+
+/* Gold dust particles — echoes the paintbrush in the logo */
+.dust-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.dust-field span {
+  position: absolute;
+  bottom: -10px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--lc-gold-light);
+  opacity: 0;
+  box-shadow: 0 0 6px 1px rgba(232, 205, 138, 0.6);
+  animation: dust-rise 9s linear infinite;
+}
+
+.dust-field span:nth-child(1)  { left: 8%;  animation-delay: 0s;   }
+.dust-field span:nth-child(2)  { left: 18%; animation-delay: 1.2s; }
+.dust-field span:nth-child(3)  { left: 28%; animation-delay: 2.4s; }
+.dust-field span:nth-child(4)  { left: 40%; animation-delay: 0.6s; }
+.dust-field span:nth-child(5)  { left: 52%; animation-delay: 3.6s; }
+.dust-field span:nth-child(6)  { left: 63%; animation-delay: 1.8s; }
+.dust-field span:nth-child(7)  { left: 73%; animation-delay: 4.2s; }
+.dust-field span:nth-child(8)  { left: 82%; animation-delay: 2.7s; }
+.dust-field span:nth-child(9)  { left: 91%; animation-delay: 5.1s; }
+.dust-field span:nth-child(10) { left: 48%; animation-delay: 6s;   }
+
+@keyframes dust-rise {
+  0%   { transform: translateY(0) scale(0.6); opacity: 0; }
+  10%  { opacity: 0.8; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-92vh) scale(1); opacity: 0; }
+}
+
+/* ===================== 2. CAMERA INSTRUCTION ===================== */
+
+#instruction-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8vh;
+  pointer-events: none;
+}
+
+.instruction-frame {
+  width: 62vw;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  border: 1.5px solid rgba(232, 205, 138, 0.55);
+  border-radius: 22px;
+  margin-bottom: 1.4rem;
+  animation: frame-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes frame-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%      { opacity: 0.9;  transform: scale(1.02); }
+}
+
+.instruction-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--lc-ivory);
+  background: rgba(18, 32, 26, 0.55);
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  text-align: center;
+  max-width: 80vw;
+}
+
+/* ===================== 4. INFORMATION CARD ===================== */
+
+#info-card {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding: 0 5vw 5vh;
+  animation: card-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.info-card-inner {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(18, 32, 26, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(201, 162, 74, 0.35);
+  border-radius: 20px;
+  padding: 1.8rem 1.7rem 1.6rem;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.ic-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--lc-gold-light);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.2rem;
+}
+
+.ic-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--lc-ivory);
+  margin: 0 0 0.9rem;
+}
+
+.ic-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--lc-sage);
+  margin: 0 0 0.7rem;
+}
+
+.ic-story {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgba(245, 239, 225, 0.85);
+  margin: 0 0 1rem;
+}
+
+.ic-meta {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(245, 239, 225, 0.4);
+  margin: 0 0 1.5rem;
+}
+
+.experience-button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  color: #1b1607;
+  background: linear-gradient(135deg, var(--lc-gold-light), var(--lc-gold));
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 2.2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(201, 162, 74, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.experience-button:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 12px rgba(201, 162, 74, 0.25);
+}
+
+/* ===================== AR EXPERIENCE ===================== */
+
+#ar-container {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+}
+
+@media (max-width: 380px) {
+  .welcome-copy { font-size: 1.12rem; }
+  .ic-story { font-size: 0.85rem; }
+}
