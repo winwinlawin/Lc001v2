@@ -1,0 +1,14 @@
+{
+  "paintings": [
+    {
+      "id": "LC001",
+      "targetIndex": 0,
+      "eyebrow": "Biyaya ng Lumikha",
+      "title": "Harvest of Abundance",
+      "story": "Every grain of rice is a reminder of hard work, faith, and the Creator's endless blessings. This artwork celebrates abundance, hope, and a thankful heart. May it inspire you to appreciate every blessing in life and remind you that true abundance begins with gratitude.",
+      "subtitle": "Living Oil Painting",
+      "meta": "LC-001 • 2026",
+      "video": "assets/videos/LC001.mp4"
+    }
+  ]
+}
